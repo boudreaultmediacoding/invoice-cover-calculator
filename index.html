@@ -72,8 +72,7 @@
     <input type="number" id="amount" placeholder="Ex: 500000" oninput="calculateCost()">
     <div class="result" id="result">Le coût estimé sera affiché ici.</div>
     <div class="disclaimer" id="disclaimer">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae convallis lectus. 
-        Curabitur quis felis eu risus viverra malesuada.
+        À titre indicatif : Cette estimation ne prend pas en compte la prime annuelle d'une police d'assurance-crédit. Celle-ci varie en fonction du chiffre d'affaires de l'assuré et se situe généralement entre 0,16 % et 1 % de ce dernier. Pour toute question ou information complémentaire, n'hésitez pas à rejoindre l'équipe d'Invoice Cover. Nous serons ravis de vous aider !
     </div>
 </div>
 
@@ -102,7 +101,7 @@
         const disclaimerDiv = document.getElementById('disclaimer');
 
         if (amount) {
-            resultDiv.textContent = `Le coût estimé est de $${cost.toFixed(2)} USD`;
+            resultDiv.textContent = `Le coût estimé est de $${cost.toFixed(2)} CAN`;
             // Afficher le disclaimer lorsque le coût est affiché
             disclaimerDiv.style.display = 'block';
         } else {
