@@ -14,6 +14,7 @@
             height: 100vh;
             margin: 0;
         }
+
         .calculator {
             background-color: #fff;
             padding: 20px;
@@ -22,16 +23,19 @@
             max-width: 400px;
             width: 100%;
         }
+
         .calculator h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
         }
+
         .calculator label {
             display: block;
             margin-bottom: 10px;
             color: #555;
         }
+
         .calculator input[type="number"] {
             width: 100%;
             padding: 10px;
@@ -41,11 +45,23 @@
             font-size: 16px;
             box-sizing: border-box;
         }
+
         .calculator .result {
             text-align: center;
             font-size: 18px;
             font-weight: bold;
             color: #4CAF50;
+        }
+
+        .disclaimer {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #666;
         }
     </style>
 </head>
@@ -56,6 +72,10 @@
     <label for="amount">Entrez le montant de l'assurance (en USD) :</label>
     <input type="number" id="amount" placeholder="Ex: 500000" oninput="calculateCost()">
     <div class="result" id="result">Le coût estimé sera affiché ici</div>
+    <div class="disclaimer" id="disclaimer">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae convallis lectus. 
+        Curabitur quis felis eu risus viverra malesuada.
+    </div>
 </div>
 
 <script>
@@ -70,17 +90,30 @@
             cost = amount * 0.00032; // 0.032% du montant
         } else if (amount >= 5000000 && amount <= 9999999) {
             cost = amount * 0.00029; // 0.029% du montant
+        } else if (amount >= 10000000 && amount <= 19999999) {
+            cost = amount * 0.00023; // 0.029% du montant
+        } else if (amount >= 20000000 && amount <= 29999999) {
+            cost = amount * 0.00020; // 0.029% du montant
+        } else if (amount >= 30000000) {
+            cost = amount * 0.00016; // 0.029% du montant
         }
 
         // Afficher le résultat
         const resultDiv = document.getElementById('result');
+        const disclaimerDiv = document.getElementById('disclaimer');
+
         if (amount) {
             resultDiv.textContent = `Le coût estimé est de $${cost.toFixed(2)} USD`;
+            // Afficher le disclaimer lorsque le coût est affiché
+            disclaimerDiv.style.display = 'block';
         } else {
             resultDiv.textContent = 'Le coût estimé sera affiché ici';
+            // Masquer le disclaimer si aucun montant n'est saisi
+            disclaimerDiv.style.display = 'none';
         }
     }
 </script>
 
 </body>
 </html>
+
