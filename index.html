@@ -1,36 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Power of 2 Calculator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 50px;
-      text-align: center;
-    }
-    input {
-      padding: 10px;
-      font-size: 32px;
-    }
-    p {
-      font-size: 20px;
-      color: green;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de coût d'assurance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .calculator h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .calculator label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .calculator input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .calculator .result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
 </head>
 <body>
-  <h1>Power of 2 Calculator</h1>
-  <input type="number" id="numberInput" placeholder="Enter a number" oninput="calculatePower()">
-  <p>Result: <span id="resultBox"></span></p>
 
-  <script>
-    function calculatePower() {
-      const number = document.getElementById("numberInput").value;
-      const result = Math.pow(number, 2);
-      document.getElementById("resultBox").innerText = result;
+<div class="calculator">
+    <h2>Calculateur de coût d'assurance</h2>
+    <label for="amount">Entrez le montant de l'assurance (en USD) :</label>
+    <input type="number" id="amount" placeholder="Ex: 500000" oninput="calculateCost()">
+    <div class="result" id="result">Le coût estimé sera affiché ici</div>
+</div>
+
+<script>
+    function calculateCost() {
+        const amount = document.getElementById('amount').value;
+        let cost = 0;
+
+        // Vérifier la valeur entrée et calculer le coût
+        if (amount <= 999999) {
+            cost = amount * 0.01; // 1% du montant
+        } else if (amount >= 1000000 && amount <= 4999999) {
+            cost = amount * 0.00032; // 0.032% du montant
+        } else if (amount >= 5000000 && amount <= 9999999) {
+            cost = amount * 0.00029; // 0.029% du montant
+        }
+
+        // Afficher le résultat
+        const resultDiv = document.getElementById('result');
+        if (amount) {
+            resultDiv.textContent = `Le coût estimé est de $${cost.toFixed(2)} USD`;
+        } else {
+            resultDiv.textContent = 'Le coût estimé sera affiché ici';
+        }
     }
-  </script>
+</script>
+
 </body>
 </html>
