@@ -1,116 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur de coût d'assurance</title>
+    <title>Estimation de Factures à Assurer</title>
     <style>
+        /* Appliquer une police uniforme et ajuster la taille pour le responsive */
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            font-size: 16pt;
+            margin: 20px;
         }
 
-        .calculator {
-            background-color: #fff;
+        /* Centrer le formulaire et donner de l'espace */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
             padding: 20px;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
         }
 
-        .calculator h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .calculator label {
+        /* Style des labels */
+        label {
             display: block;
             margin-bottom: 10px;
-            color: #555;
+            font-weight: bold;
         }
 
-        .calculator input[type="number"] {
+        /* Style des inputs et selects pour un meilleur rendu visuel */
+        input[type="number"],
+        select {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 14pt;
             box-sizing: border-box;
         }
 
-        .calculator .result {
-            text-align: center;
-            font-size: 18px;
+        /* Style du texte du résultat */
+        #resultat {
+            font-size: 18pt;
             font-weight: bold;
-            color: #4CAF50;
+            margin-top: 20px;
+            color: green;
         }
 
-        .disclaimer {
-            display: none;
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-            font-size: 12px;
-            color: #666;
+        /* Rendre la page responsive */
+        @media (max-width: 600px) {
+            body {
+                font-size: 14pt;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            input[type="number"],
+            select {
+                font-size: 13pt;
+            }
+
+            #resultat {
+                font-size: 16pt;
+            }
         }
     </style>
+    <script>
+        function calculerEstimation() {
+            var chiffreVente = document.getElementById("chiffreVente").value;
+            var taux = 0;
+
+            switch (chiffreVente) {
+                case "1":
+                    taux = 0.01;
+                    break;
+                case "2":
+                    taux = 0.032;
+                    break;
+                case "3":
+                    taux = 0.029;
+                    break;
+                case "4":
+                    taux = 0.023;
+                    break;
+                case "5":
+                    taux = 0.020;
+                    break;
+                case "6":
+                    taux = 0.016;
+                    break;
+                default:
+                    taux = 0;
+            }
+
+            var montantFacture = document.getElementById("montantFacture").value;
+            var montantEstime = (chiffreVente != "0" && montantFacture > 0) ? montantFacture * taux : 0;
+
+            if (chiffreVente != "0" && montantFacture > 0) {
+                document.getElementById("resultat").innerHTML = "Le montant estimé à assurer est : " + montantEstime.toFixed(2) + " $";
+            } else {
+                document.getElementById("resultat").innerHTML = "Le coût estimé sera affiché ici.";
+            }
+        }
+    </script>
 </head>
 <body>
 
-<div class="calculator">
-    <h2>Calculez rapidement le coût de votre police d'assurance crédit.</h2>
-    <label for="amount">Entrez le montant du paiement à assurer :</label>
-    <input type="number" id="amount" placeholder="Ex: 500000" oninput="calculateCost()">
-    <div class="result" id="result">Le coût estimé sera affiché ici.</div>
-    <div class="disclaimer" id="disclaimer">
-        À titre indicatif : Cette estimation ne prend pas en compte la prime annuelle d'une police d'assurance-crédit. Celle-ci varie en fonction du chiffre d'affaires de l'assuré et se situe généralement entre 0,16 % et 1 % de ce dernier. Pour toute question ou information complémentaire, n'hésitez pas à rejoindre l'équipe d'Invoice Cover. Nous serons ravis de vous aider !
+    <div class="container">
+        <!-- Question 1: Estimation du chiffre de vente annuel -->
+        <label for="chiffreVente">Quel est votre chiffre de vente annuel (12 mois) ?</label>
+        <select id="chiffreVente" onchange="calculerEstimation()">
+            <option value="0">Sélectionnez une option</option>
+            <option value="1">Jusqu'à 999 999 $</option>
+            <option value="2">1 000 000 $ à 4 999 999 $</option>
+            <option value="3">5 000 000 $ à 9 999 999 $</option>
+            <option value="4">10 000 000 $ à 19 999 999 $</option>
+            <option value="5">20 000 000 $ à 29 999 999 $</option>
+            <option value="6">30 000 000 $ et plus</option>
+        </select>
+
+        <!-- Question 2: Montant de la ou des factures à assurer -->
+        <label for="montantFacture">Quel est le montant de la ou des factures à assurer ?</label>
+        <input type="number" id="montantFacture" oninput="calculerEstimation()" placeholder="Entrez le montant" />
+
+        <!-- Résultat affiché avec la phrase initiale en vert, remplacée par le calcul lorsque les questions sont remplies -->
+        <div id="resultat">Le coût estimé sera affiché ici.</div>
     </div>
-</div>
-
-<script>
-    function calculateCost() {
-        const amount = document.getElementById('amount').value;
-        let cost = 0;
-
-        // Vérifier la valeur entrée et calculer le coût
-        if (amount <= 999999) {
-            cost = amount * 0.01; // 1% du montant
-        } else if (amount >= 1000000 && amount <= 4999999) {
-            cost = amount * 0.00032; // 0.032% du montant
-        } else if (amount >= 5000000 && amount <= 9999999) {
-            cost = amount * 0.00029; // 0.029% du montant
-        } else if (amount >= 10000000 && amount <= 19999999) {
-            cost = amount * 0.00023; // 0.029% du montant
-        } else if (amount >= 20000000 && amount <= 29999999) {
-            cost = amount * 0.00020; // 0.029% du montant
-        } else if (amount >= 30000000) {
-            cost = amount * 0.00016; // 0.029% du montant
-        }
-
-        // Afficher le résultat
-        const resultDiv = document.getElementById('result');
-        const disclaimerDiv = document.getElementById('disclaimer');
-
-        if (amount) {
-            resultDiv.textContent = `Le coût estimé est de ${cost.toFixed(2)}$ CAN`;
-            // Afficher le disclaimer lorsque le coût est affiché
-            disclaimerDiv.style.display = 'block';
-        } else {
-            resultDiv.textContent = 'Le coût estimé sera affiché ici';
-            // Masquer le disclaimer si aucun montant n'est saisi
-            disclaimerDiv.style.display = 'none';
-        }
-    }
-</script>
 
 </body>
 </html>
