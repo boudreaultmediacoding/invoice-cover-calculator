@@ -102,7 +102,7 @@
             var montantEstime = (chiffreVente != "0" && montantFacture > 0) ? montantFacture * taux : 0;
 
             if (chiffreVente != "0" && montantFacture > 0) {
-                document.getElementById("resultat").innerHTML = "Le montant estimé à assurer est : " + montantEstime.toFixed(2) + " $";
+                document.getElementById("resultat").innerHTML = "Coût estimé : " + montantEstime.toFixed(2) + " $";
             } else {
                 document.getElementById("resultat").innerHTML = "Le coût estimé sera affiché ici.";
             }
