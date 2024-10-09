@@ -102,9 +102,9 @@
             var montantEstime = (chiffreVente != "0" && montantFacture > 0) ? montantFacture * taux : 0;
 
             if (chiffreVente != "0" && montantFacture > 0) {
-                document.getElementById("resultat").innerHTML = "Assurez vos ventes pour :" + montantEstime.toFixed(2) + " $";
+                document.getElementById("resultat").innerHTML = "Assurez vos ventes pour : " + montantEstime.toFixed(2) + " $";
             } else {
-                document.getElementById("resultat").innerHTML = "Le coût estimé sera affiché ici.";
+                document.getElementById("resultat").innerHTML = "L’estimation s’affichera ici.";
             }
         }
     </script>
@@ -129,7 +129,7 @@
         <input type="number" id="montantFacture" oninput="calculerEstimation()" placeholder="Entrez le montant" />
 
         <!-- Résultat affiché avec la phrase initiale en vert, remplacée par le calcul lorsque les questions sont remplies -->
-        <div id="resultat">Le coût estimé sera affiché ici.</div>
+        <div id="resultat">L’estimation s’affichera ici.</div>
     </div>
 
 </body>
