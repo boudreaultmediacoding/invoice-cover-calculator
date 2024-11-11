@@ -142,7 +142,7 @@
 
     <div class="container">
         <!-- Question 1: Estimation du chiffre de vente annuel -->
-        <label for="chiffreVente" id="chiffreVenteLabel">Votre chiffre de vente annuel (12 mois)</label>
+        <label for="chiffreVente" id="chiffreVenteLabel">Votre chiffre de vente annuel (12 mois):</label>
         <select id="chiffreVente" onchange="calculerEstimation()">
             <option value="0">Sélectionnez une option</option>
             <option value="1" id="option1">Jusqu'à 999 999 $</option>
@@ -154,7 +154,7 @@
         </select>
 
         <!-- Question 2: Montant de la ou des factures à assurer -->
-        <label for="montantFacture" id="montantFactureLabel">Transactions moyennes ( $ )</label>
+        <label for="montantFacture" id="montantFactureLabel">Transactions moyennes ($):</label>
         <input type="number" id="montantFacture" oninput="calculerEstimation()" placeholder="Entrez le montant" />
 
         <!-- Résultat affiché avec la phrase initiale en vert, remplacée par le calcul lorsque les questions sont remplies -->
