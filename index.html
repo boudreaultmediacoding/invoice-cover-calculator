@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -70,15 +71,15 @@
         }
     </style>
     <script>
-        // Fonction pour détecter la langue dans l'URL et ajuster le texte
+        // Fonction pour détecter la langue en vérifiant les 7 derniers caractères de l'URL
         function detectLanguage() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const isEnglish = urlParams.has('lang') && urlParams.get('lang') === 'en';
+            const isEnglish = window.location.href.slice(-7) === 'lang=en';
 
+            // Si la langue est anglaise, changer les textes
             if (isEnglish) {
                 document.getElementById("chiffreVenteLabel").textContent = "Your annual sales revenue (12 months)";
                 document.getElementById("montantFactureLabel").textContent = "Average transactions ($)";
-                document.getElementById("resultat").textContent = "The estimate will appear here.";
+                document.getElementById("resultLabel").textContent = "The estimate will appear here.";
                 document.getElementById("option1").textContent = "Up to $999,999";
                 document.getElementById("option2").textContent = "$1,000,000 to $4,999,999";
                 document.getElementById("option3").textContent = "$5,000,000 to $9,999,999";
@@ -161,3 +162,4 @@
     </div>
 
 </body>
+</html>
